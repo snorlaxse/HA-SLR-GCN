@@ -1,0 +1,90 @@
+########################## Test  ##########################
+
+phase: test
+
+modality: bone
+joint_sign: sign_autsl
+joint_sign: sign
+joint_type: 27_cvpr
+pretrain_cpt_time_tag: "*"  # 仅有单次训练时 可使用*
+
+# 指定某一特定预训练模型（绝对路径）
+weights: xxxx
+
+# 自动匹配时设置
+splits: ["train", "val", "test"]
+# splits: ["val", "test"]
+
+#optim
+test_base_lr: 1e-8
+step: [500]
+
+########################## MODEL  ##########################
+
+# HA-SLR-GCN 
+Experiment_name: AUTSL/Bone/autsl_bone_27_cvpr_hand_aware_sl_lgcn_baseline   
+model: model.hand_aware_sl_lgcn.Model
+
+############ Hyperparameter ############
+
+device: [2]
+# es: True
+es_patience: 50
+es: False
+num_epoch: 500
+eval_pkl: xxxx
+
+warm_up_epoch: 20
+
+########################## Arguments  ##########################
+
+# feeder
+feeder: feeders.feeder_cvpr.Feeder
+train_feeder_args:
+  data_path: ./data/sign_autsl/27_cvpr/train_data_bone.npy
+  label_path: ./data/sign_autsl/27_cvpr/train_label.pkl
+  debug: False   # If true, only use the first 100 samples  
+  random_choose: True   # 在debug的基础上，随机选择视频起始帧、输出长度为window_size的帧序列  TemporalRandomCrop
+  window_size: 100 
+  random_shift: True  # 随机偏移，偏移片段用0填充   # 在序列头部 填充全0帧
+  normalization: True
+  random_mirror: True   # 随机镜像，增加 多样性   # 当前帧 是否翻转
+  random_mirror_p: 0.5   # 随机镜像的阈值
+  is_vector: True  # 相关：random_shift、normalization、random_mirror   # 除joint外，bone、Jm、Bm 均为 True
+
+val_feeder_args:
+  data_path: ./data/sign_autsl/27_cvpr/val_data_bone.npy    
+  label_path: ./data/sign_autsl/27_cvpr/val_label.pkl
+  random_mirror: False
+  normalization: True
+  is_vector: True  # 相关：random_shift、normalization、random_mirror   # 除joint外，bone、Jm、Bm 均为 True
+  debug: False
+
+test_feeder_args:
+  data_path: ./data/sign_autsl/27_cvpr/test_data_bone.npy
+  label_path: ./data/sign_autsl/27_cvpr/test_label.pkl
+  random_mirror: False
+  normalization: True
+  is_vector: True  # 相关：random_shift、normalization、random_mirror   # 除joint外，bone、Jm、Bm 均为 True
+  debug: False
+
+model_args:
+  num_class: 226  # autsl
+  num_point: 27
+  num_person: 1
+  graph: graph.sign_27_cvpr.Graph
+  A_hands: graph.sign_27_A_hands.Graph
+  groups: 16
+  block_size: 41
+  graph_args:
+    labeling_mode: 'spatial'
+
+#optim
+weight_decay: 0.0001
+
+# training
+keep_rate: 0.9
+only_train_epoch: 1
+batch_size: 64
+test_batch_size: 64
+nesterov: True
