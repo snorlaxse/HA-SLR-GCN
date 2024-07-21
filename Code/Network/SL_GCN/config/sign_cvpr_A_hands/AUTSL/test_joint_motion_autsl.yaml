@@ -1,13 +1,3 @@
-########################## Train ##########################
-phase: train
-
-# optim
-train_base_lr: 0.1
-step: [150, 200]
-
-# # 预训练模型
-# weights: /raid/zhengjian/AUTSL-Recognition/Code/Skeleton/Network/SL_GCN//work_dir/AUTSL-old/joint_27_cvpr_sl_lgcn_alpha_hands_wo_dropSke_baseline/save_models/joint_27_cvpr_sl_lgcn_alpha_hands_wo_dropSke_baseline_best_acc_71_9687.pt
-
 ########################## Test  ##########################
 
 phase: test
@@ -26,6 +16,7 @@ splits: ["train", "val", "test"]
 # splits: ["val", "test"]
 
 #optim
+train_base_lr: 0.1
 test_base_lr: 1e-8
 step: [500]
 

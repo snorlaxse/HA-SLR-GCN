@@ -16,6 +16,7 @@ splits: ["train", "val", "test"]
 # splits: ["val", "test"]
 
 #optim
+train_base_lr: 0.1
 test_base_lr: 1e-8
 step: [500]
 

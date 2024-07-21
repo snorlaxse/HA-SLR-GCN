@@ -13,12 +13,12 @@ pretrain_cpt_time_tag: "*"  # 仅有单次训练时 可使用*
 
 # # 指定某一特定预训练模型, 不需要注释（绝对路径）
 weights: xxxx   
-test_split: xxx  # train or test # 对应 想要测试的 split 
 
 # 自动匹配时设置
 splits: ["train", "test"]   # include
 
 #optim
+train_base_lr: 0.1
 test_base_lr: 1e-8
 step: [500]
 
