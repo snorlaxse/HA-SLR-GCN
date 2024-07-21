@@ -4,6 +4,18 @@ The processed keypoints data can be downloaded [HERE](https://drive.google.com/d
 
 After downloading and unpacking it, place it in the `Code/Network/SL_GCN/data/`.
 
+## Requirements
+Install some packages as follows.
+```
+torch
+torchvision
+torchaudio  
+tqdm
+tensorboard
+pyyaml
+pandas
+```
+
 ## Usage
 
 ```

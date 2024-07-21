@@ -4,7 +4,6 @@ phase: test
 
 modality: joint_motion
 joint_sign: sign_autsl
-joint_sign: sign
 joint_type: 27_cvpr
 pretrain_cpt_time_tag: "*"  # 仅有单次训练时 可使用*
 
