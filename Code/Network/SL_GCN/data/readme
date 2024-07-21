@@ -1,0 +1,4 @@
+## Data preparation
+The processed keypoints data can be downloaded [HERE](https://drive.google.com/drive/folders/1LM6gpmtgrcUvXdDkyKGVTQuDtqfViMKz?usp=drive_link).
+
+After downloading and unpacking it, place it in the `Code/Network/SL_GCN/data/`.
